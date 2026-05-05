@@ -2,6 +2,7 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
+import { CircleUserRound } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "../context/LanguageContext";
 
@@ -49,8 +50,8 @@ export default function Navigation({ isLoggedIn, user, onLogout }) {
                       className="w-8 h-8 rounded-full object-cover border border-gray-200"
                     />
                   ) : (
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center text-white font-semibold" style={{ backgroundColor: '#4B8481' }}>
-                      {user?.username?.charAt(0)?.toUpperCase() || 'U'}
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center border border-gray-200 bg-[#e8f4f4] text-[#4B8481]">
+                      <CircleUserRound className="w-5 h-5" />
                     </div>
                   )}
                   <Link href="/dashboard" className="max-w-32 truncate text-sm font-semibold text-gray-900 hover:text-[#4B8481]" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
@@ -109,8 +110,8 @@ export default function Navigation({ isLoggedIn, user, onLogout }) {
                       className="w-9 h-9 rounded-full object-cover border border-gray-200"
                     />
                   ) : (
-                    <div className="w-9 h-9 rounded-full flex items-center justify-center text-white font-semibold" style={{ backgroundColor: '#4B8481' }}>
-                      {user?.username?.charAt(0)?.toUpperCase() || 'U'}
+                    <div className="w-9 h-9 rounded-full flex items-center justify-center border border-gray-200 bg-[#e8f4f4] text-[#4B8481]">
+                      <CircleUserRound className="w-6 h-6" />
                     </div>
                   )}
                   <span className="font-semibold text-gray-900" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>

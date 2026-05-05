@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 import Head from 'next/head';
+import { CircleUserRound } from 'lucide-react';
 import { kitsData } from '../data/kits';
 import { clearClientSession, getStoredUser } from '../lib/clientCookies';
 import { fetchMongoUserData, patchMongoUserData, persistLocalUserData } from '../lib/userDataClient';
@@ -275,8 +276,8 @@ export default function Dashboard() {
                       className="w-8 h-8 rounded-full object-cover border border-gray-200"
                     />
                   ) : (
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center text-white font-semibold" style={{ backgroundColor: '#4B8481' }}>
-                      {user?.username?.charAt(0)?.toUpperCase() || 'U'}
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center border border-gray-200 bg-[#e8f4f4] text-[#4B8481]">
+                      <CircleUserRound className="w-5 h-5" />
                     </div>
                   )}
                   <button onClick={handleLogout} className="text-sm text-gray-500 hover:text-gray-700" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{t.common.signOut}</button>
@@ -306,8 +307,8 @@ export default function Dashboard() {
                     className="w-16 h-16 rounded-full object-cover border border-gray-200"
                   />
                 ) : (
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl font-bold" style={{ backgroundColor: '#4B8481' }}>
-                    {user?.username?.charAt(0)?.toUpperCase() || 'U'}
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center border border-gray-200 bg-[#e8f4f4] text-[#4B8481]">
+                    <CircleUserRound className="w-9 h-9" />
                   </div>
                 )}
                 <div>

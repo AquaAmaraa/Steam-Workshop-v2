@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
+import { CircleUserRound } from 'lucide-react';
 import { getKitBySlug, getAllKits } from '../../data/kits';
 import { getLocalizedKit } from '../../data/kitsLocale';
 import { getPublicKitReviews } from '../../data/kitReviews';
@@ -177,8 +178,8 @@ export default function KitDetail() {
                         className="w-8 h-8 rounded-full object-cover border border-gray-200"
                       />
                     ) : (
-                      <div className="w-8 h-8 rounded-full flex items-center justify-center text-white font-semibold" style={{ backgroundColor: '#4B8481' }}>
-                        {user?.username?.charAt(0)?.toUpperCase() || 'U'}
+                      <div className="w-8 h-8 rounded-full flex items-center justify-center border border-gray-200 bg-[#e8f4f4] text-[#4B8481]">
+                        <CircleUserRound className="w-5 h-5" />
                       </div>
                     )}
                     <button onClick={handleLogout} className="text-sm text-gray-500 hover:text-gray-700" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{t.common.signOut}</button>
@@ -404,4 +405,3 @@ export async function getStaticPaths() {
 export async function getStaticProps() {
   return { props: {} };
 }
-
