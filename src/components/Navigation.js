@@ -97,6 +97,22 @@ export default function Navigation({ isLoggedIn, user, onLogout }) {
             <div className="h-px bg-gray-100 my-2"></div>
             {isLoggedIn ? (
               <>
+                <div className="flex items-center gap-3 px-4 py-3">
+                  {user?.profilePicture ? (
+                    <img
+                      src={user.profilePicture}
+                      alt="Profile"
+                      className="w-9 h-9 rounded-full object-cover border border-gray-200"
+                    />
+                  ) : (
+                    <div className="w-9 h-9 rounded-full flex items-center justify-center text-white font-semibold" style={{ backgroundColor: '#4B8481' }}>
+                      {user?.username?.charAt(0)?.toUpperCase() || 'U'}
+                    </div>
+                  )}
+                  <span className="font-semibold text-gray-900" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+                    {user?.username || 'User'}
+                  </span>
+                </div>
                 <Link href="/learn" className="block px-4 py-3 rounded-lg font-medium" style={{ color: '#4B8481', fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{t.common.myLearning}</Link>
                 <Link href="/dashboard" className="block px-4 py-3 rounded-lg font-medium" style={{ color: '#4B8481', fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{t.common.dashboard}</Link>
                 <button onClick={handleLogout} className="block w-full text-left px-4 py-3 rounded-lg text-gray-500 font-medium" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{t.common.signOut}</button>
@@ -114,4 +130,3 @@ export default function Navigation({ isLoggedIn, user, onLogout }) {
     </nav>
   );
 }
-

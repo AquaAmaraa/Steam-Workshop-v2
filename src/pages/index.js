@@ -7,6 +7,7 @@ import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 import { useLanguage } from '../context/LanguageContext';
 import { clearClientSession, getStoredUser } from '../lib/clientCookies';
+import { fetchMongoUserData } from '../lib/userDataClient';
 
 export default function Home() {
   const { language } = useLanguage();
@@ -14,11 +15,30 @@ export default function Home() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    let isMounted = true;
+
     const storedUser = getStoredUser();
     if (storedUser) {
       setIsLoggedIn(true);
       setUser(storedUser);
     }
+
+    const refreshUser = async () => {
+      try {
+        const serverData = await fetchMongoUserData();
+        if (!isMounted) return;
+        setIsLoggedIn(true);
+        setUser(serverData.user);
+      } catch {
+        // Visitors and expired sessions should keep seeing the public homepage.
+      }
+    };
+
+    refreshUser();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const handleLogout = async () => {
