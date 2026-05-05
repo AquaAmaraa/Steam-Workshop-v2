@@ -1,0 +1,27 @@
+{
+  "name": "steam",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@getbrevo/brevo": "^5.0.4",
+    "@vercel/speed-insights": "^1.2.0",
+    "bcryptjs": "^3.0.3",
+    "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.555.0",
+    "mongodb": "^7.0.0",
+    "next": "^16.2.4",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.22",
+    "baseline-browser-mapping": "^2.9.19",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.18"
+  }
+}
