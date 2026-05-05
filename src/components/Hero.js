@@ -11,9 +11,6 @@ export default function Hero() {
         desc: 'Гэр бүл, багш, сургалтын төвд зориулсан практик STEAM багц. Идэвхжүүлээд видео сан, туршилтын ахиц, суралцах дарааллаа нэг дор удирдана.',
         cta1: 'Багцыг үзэх',
         cta2: 'Багцаа идэвхжүүлэх',
-        stat1: '36 төсөл',
-        stat2: '4 видео',
-        stat3: '3 хэсэг',
         safe: 'Аюулгүй материал',
         guided: 'Видео заавар',
         access: 'Кодоор нээгдэнэ',
@@ -25,9 +22,6 @@ export default function Hero() {
         desc: 'A premium single-set program for families, classrooms, and after-school learning. Activate once, unlock guided videos, track progress, and keep every activity organized.',
         cta1: 'View The Set',
         cta2: 'Activate Set',
-        stat1: '36 projects',
-        stat2: '4 videos',
-        stat3: '3 sections',
         safe: 'Safe materials',
         guided: 'Guided videos',
         access: 'Code access',
@@ -64,13 +58,6 @@ export default function Hero() {
             </a>
           </div>
 
-          <div className="mt-10 grid max-w-2xl grid-cols-3 gap-3">
-            {[copy.stat1, copy.stat2, copy.stat3].map((stat) => (
-              <div key={stat} className="rounded-xl border border-gray-100 bg-white p-4 shadow-sm">
-                <p className="text-lg font-extrabold text-gray-950" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{stat}</p>
-              </div>
-            ))}
-          </div>
         </div>
 
         <div className="relative">

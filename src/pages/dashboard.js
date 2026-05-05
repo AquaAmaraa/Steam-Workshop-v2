@@ -57,7 +57,7 @@ export default function Dashboard() {
         uploadHint: 'JPG/PNG зураг оруулна уу (дээд хэмжээ 512KB)',
         changePicture: 'Зураг солих',
         stats: {
-          kitsActivated: 'Идэвхжүүлсэн багц',
+          setActivated: 'Багц идэвхжсэн',
           experimentsDone: 'Дууссан туршилт',
           videosWatched: 'Үзсэн видео',
         },
@@ -78,7 +78,9 @@ export default function Dashboard() {
         browseKitsDesc: 'Манай цуглуулгыг сонирхоорой',
         activateToTrack: 'Туршилтаа хянахын тулд багцаа идэвхжүүлнэ үү',
         videoLessons: 'Видео хичээлүүд',
-        videoLessonsDesc: 'YouTube-ээс шууд тоглуулах 4 жишээ видео.',
+        videoLessonsDesc: 'YouTube-ээс шууд тоглуулах 8 жишээ видео.',
+        yes: 'Тийм',
+        no: 'Үгүй',
       }
     : {
         pageTitle: 'Dashboard - STEAM Workshop',
@@ -93,7 +95,7 @@ export default function Dashboard() {
         uploadHint: 'Upload a JPG/PNG image (max 512KB)',
         changePicture: 'Change Picture',
         stats: {
-          kitsActivated: 'Kits Activated',
+          setActivated: 'Set Activated',
           experimentsDone: 'Experiments Done',
           videosWatched: 'Videos Watched',
         },
@@ -114,7 +116,9 @@ export default function Dashboard() {
         browseKitsDesc: 'Explore our collection',
         activateToTrack: 'Activate a kit to start tracking experiments',
         videoLessons: 'Video Lessons',
-        videoLessonsDesc: 'Four playable YouTube lessons you can replace with your own links.',
+        videoLessonsDesc: 'Eight playable Michael Jackson videos.',
+        yes: 'Yes',
+        no: 'No',
       };
 
   useEffect(() => {
@@ -248,7 +252,7 @@ export default function Dashboard() {
   const stats = getTotalStats();
   const dashboardVideos = purchases
     .flatMap((kitSlug) => (kitsData[kitSlug]?.videos || []).map((video) => ({ ...video, kitTitle: kitsData[kitSlug].title })))
-    .slice(0, 4);
+    .slice(0, 8);
 
   return (
     <>
@@ -338,7 +342,7 @@ export default function Dashboard() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
             {[
-              { label: copy.stats.kitsActivated, value: purchases.length, icon: 'kit' },
+              { label: copy.stats.setActivated, value: purchases.length > 0 ? copy.yes : copy.no, icon: 'kit' },
               { label: copy.stats.experimentsDone, value: `${stats.completedExperiments}/${stats.totalExperiments}`, icon: 'experiment' },
               { label: copy.stats.videosWatched, value: `${stats.watchedVideos}/${stats.totalVideos}`, icon: 'video' },
             ].map((stat, i) => (
