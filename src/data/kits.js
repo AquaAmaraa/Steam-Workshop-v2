@@ -40,10 +40,10 @@ export const kitsData = {
       { id: 'core-4', title: 'Problem-Solving Sprint', description: 'Apply what you learned to complete a guided design challenge.', duration: '30 mins', difficulty: 'Hard', videoId: 'core-problem-solving', thumbnail: '04' }
     ],
     videos: [
-      { id: 'core-color-reaction', title: 'Color Reaction Lab', youtubeId: 'dQw4w9WgXcQ', duration: '08:40', description: 'A guided lesson on observing and documenting color reactions.', experimentId: 'core-1' },
-      { id: 'core-magnetic-build', title: 'Magnetic Build Challenge', youtubeId: 'dQw4w9WgXcQ', duration: '10:25', description: 'Build with intent and improve structural stability.', experimentId: 'core-2' },
-      { id: 'core-motion-system', title: 'Simple Motion System', youtubeId: 'dQw4w9WgXcQ', duration: '12:15', description: 'Learn how motion, force, and control work together.', experimentId: 'core-3' },
-      { id: 'core-problem-solving', title: 'Problem-Solving Sprint', youtubeId: 'dQw4w9WgXcQ', duration: '11:30', description: 'Use the full workflow to solve a structured challenge.', experimentId: 'core-4' }
+      { id: 'core-color-reaction', title: 'Color Reaction Lab', youtubeId: 'M7lc1UVf-VE', duration: '08:40', description: 'A guided lesson on observing and documenting color reactions.', experimentId: 'core-1' },
+      { id: 'core-magnetic-build', title: 'Magnetic Build Challenge', youtubeId: 'aqz-KE-bpKQ', duration: '10:25', description: 'Build with intent and improve structural stability.', experimentId: 'core-2' },
+      { id: 'core-motion-system', title: 'Simple Motion System', youtubeId: 'ysz5S6PUM-U', duration: '12:15', description: 'Learn how motion, force, and control work together.', experimentId: 'core-3' },
+      { id: 'core-problem-solving', title: 'Problem-Solving Sprint', youtubeId: 'ScMzIvxBSi4', duration: '11:30', description: 'Use the full workflow to solve a structured challenge.', experimentId: 'core-4' }
     ]
   }
 };

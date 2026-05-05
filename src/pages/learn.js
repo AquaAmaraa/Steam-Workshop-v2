@@ -250,8 +250,12 @@ export default function Learn() {
                         const watched = isVideoWatched(video.id);
                         return (
                           <div key={video.id} onClick={() => handleWatchVideo(video)} className={`bg-white rounded-xl overflow-hidden border cursor-pointer hover:shadow-md transition-all ${watched ? 'border-green-200' : 'border-gray-100'}`}>
-                            <div className="relative aspect-video flex items-center justify-center" style={{ backgroundColor: '#f8fafa' }}>
-                              <div className="text-4xl">{currentKit.experiments.find((e) => e.id === video.experimentId)?.thumbnail || '🎬'}</div>
+                            <div className="relative aspect-video overflow-hidden bg-gray-950">
+                              <img
+                                src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
+                                alt=""
+                                className="h-full w-full object-cover opacity-90 transition-transform duration-300 hover:scale-105"
+                              />
                               <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{video.duration}</div>
                               {watched && (
                                 <div className="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full flex items-center gap-1" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
@@ -284,14 +288,14 @@ export default function Learn() {
         {showVideoModal && selectedVideo && (
           <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
             <div className="bg-white rounded-2xl w-full max-w-4xl overflow-hidden">
-              <div className="relative aspect-video flex items-center justify-center" style={{ backgroundColor: '#f8fafa' }}>
-                <div className="text-center">
-                  <div className="w-20 h-20 rounded-full bg-white shadow-lg flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 ml-1" style={{ color: '#4B8481' }} fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" /></svg>
-                  </div>
-                  <p className="text-gray-600" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{selectedVideo.title}</p>
-                  <p className="text-sm text-gray-500" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{copy.duration}: {selectedVideo.duration}</p>
-                </div>
+              <div className="aspect-video bg-gray-950">
+                <iframe
+                  className="h-full w-full"
+                  src={`https://www.youtube.com/embed/${selectedVideo.youtubeId}`}
+                  title={selectedVideo.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-2" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{selectedVideo.title}</h3>

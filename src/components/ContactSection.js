@@ -1,169 +1,99 @@
-﻿import { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
+import { Mail, Phone, Clock, MessageCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function ContactSection() {
   const { language } = useLanguage();
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      } else {
-        setSubmitStatus('error');
-      }
-    } catch (error) {
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus(null), 3000);
-    }
-  };
 
   const copy = language === 'mn'
     ? {
-        title: 'Хамтдаа Ярилцъя',
-        subtitle: 'Асуулт байна уу? Хамтрахыг хүсэж байна уу? Бидэнтэй холбогдоорой!',
+        eyebrow: 'Холбоо барих',
+        title: 'Асуулт байвал шууд холбогдоорой',
+        subtitle: 'Бид захиалга, хамтын ажиллагаа, сургалтын багцтай холбоотой мэдээллийг имэйл болон утсаар авч хариулна.',
         email: 'Имэйл',
         phone: 'Утас',
-        location: 'Байршил',
-        sendMessage: 'Бидэнд Зурвас Илгээх',
-        success: 'Зурвас амжилттай илгээгдлээ!',
-        error: 'Алдаа гарлаа. Дахин оролдоно уу.',
-        namePlaceholder: 'Таны нэр',
-        emailPlaceholder: 'Имэйл хаяг',
-        selectTopic: 'Сэдэв сонгох...',
-        order: 'Захиалгын асуулт',
-        partnership: 'Хамтын ажиллагаа',
-        support: 'Техникийн тусламж',
-        other: 'Бусад',
-        messagePlaceholder: 'Бидэнд юу хэрэгтэй байгаагаа бичнэ үү...',
-        sending: 'Илгээж байна...',
-        send: 'Зурвас Илгээх',
+        hours: 'Хариу өгөх цаг',
+        hoursValue: 'Ажлын өдрүүдэд 10:00-18:00',
+        noteTitle: 'Хурдан зөвлөгөө хэрэгтэй юу?',
+        note: 'Имэйл бичихдээ хүүхдийн нас, сонирхож буй багц, авах тоо хэмжээгээ оруулбал бид илүү хурдан зөв мэдээлэл өгнө.',
+        emailAction: 'Имэйл бичих',
+        phoneAction: 'Залгах',
       }
     : {
-        title: "Let's Start a Conversation",
-        subtitle: 'Have questions? Want to partner? Contact us!',
+        eyebrow: 'Contact',
+        title: 'Reach us directly',
+        subtitle: 'For orders, partnerships, and kit questions, contact us by email or phone. No form, no waiting room.',
         email: 'Email',
         phone: 'Phone',
-        location: 'Location',
-        sendMessage: 'Send us a Message',
-        success: 'Message sent successfully!',
-        error: 'Something went wrong. Try again.',
-        namePlaceholder: 'Your Name',
-        emailPlaceholder: 'Email Address',
-        selectTopic: 'Select a topic...',
-        order: 'Order Inquiry',
-        partnership: 'Partnership',
-        support: 'Technical Support',
-        other: 'Other',
-        messagePlaceholder: "Tell us what's on your mind...",
-        sending: 'Sending...',
-        send: 'Send Message',
+        hours: 'Reply hours',
+        hoursValue: 'Weekdays, 10:00-18:00',
+        noteTitle: 'Need a faster answer?',
+        note: 'When emailing, include the learner age, the kit you are interested in, and the quantity so we can reply with the right details.',
+        emailAction: 'Email us',
+        phoneAction: 'Call now',
       };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #C9E0E0 0%, #ffffff 100%)' }}>
-      {/* Snowflakes */}
-      <div className="absolute top-20 left-10 text-2xl opacity-30 hidden md:block">❄️</div>
-      <div className="absolute top-40 right-20 text-xl opacity-20 hidden md:block">❄️</div>
-
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16">
+    <section id="contact" className="relative overflow-hidden bg-white py-24">
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#eef7f6] to-white" />
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <h2 className="text-4xl lg:text-5xl text-gray-900 mb-6" style={{ fontFamily: "'Gochi Hand', 'Noto Sans', cursive" }}>
+            <p className="mb-3 text-sm font-bold uppercase tracking-[0.18em] text-[#4B8481]" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+              {copy.eyebrow}
+            </p>
+            <h2 className="max-w-xl text-4xl font-extrabold leading-tight text-gray-950 lg:text-5xl" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
               {copy.title}
             </h2>
-            <p className="text-gray-600 text-lg mb-10 max-w-md" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+            <p className="mt-5 max-w-xl text-lg leading-8 text-gray-600" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
               {copy.subtitle}
             </p>
-
-            <div className="space-y-6 mb-10">
-              <div className="flex items-center gap-4">
-                <Mail className="w-6 h-6" style={{ color: '#4B8481' }} />
-                <div>
-                  <div className="text-sm text-gray-500" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{copy.email}</div>
-                  <div className="font-semibold text-gray-900" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>Steamworkshop.kids@outlook.com</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <Phone className="w-6 h-6" style={{ color: '#4B8481' }} />
-                <div>
-                  <div className="text-sm text-gray-500" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{copy.phone}</div>
-                  <div className="font-semibold text-gray-900" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>+976 99224146</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <MapPin className="w-6 h-6" style={{ color: '#4B8481' }} />
-                <div>
-                  <div className="text-sm text-gray-500" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{copy.location}</div>
-                  <div className="font-semibold text-gray-900" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>Ulaanbaatar, Mongolia</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              {[Facebook, Instagram, Youtube, Twitter].map((Icon, i) => (
-                <a key={i} href="#" className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl text-gray-600 transition-all" style={{ ':hover': { color: '#4B8481' } }}>
-                  <Icon className="w-5 h-5" />
-                </a>
-              ))}
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href="mailto:Steamworkshop.kids@outlook.com" className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#4B8481] px-5 py-3 font-bold text-white transition hover:bg-[#3f706d]" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+                <Mail className="h-5 w-5" />
+                {copy.emailAction}
+              </a>
+              <a href="tel:+97699224146" className="inline-flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-3 font-bold text-gray-900 transition hover:border-[#4B8481] hover:text-[#4B8481]" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+                <Phone className="h-5 w-5" />
+                {copy.phoneAction}
+              </a>
             </div>
           </div>
 
-          <div className="bg-white rounded-3xl p-8 lg:p-10 shadow-2xl">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{copy.sendMessage}</h3>
-            
-            {submitStatus === 'success' && (
-              <div className="mb-6 p-4 border-2 rounded-xl" style={{ backgroundColor: '#C9E0E0', borderColor: '#4B8481' }}>
-                <p className="font-semibold" style={{ color: '#4B8481', fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{copy.success}</p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <a href="mailto:Steamworkshop.kids@outlook.com" className="rounded-xl border border-gray-100 bg-[#f8fbfb] p-6 transition hover:border-[#4B8481] hover:bg-white">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-white text-[#4B8481] shadow-sm">
+                <Mail className="h-6 w-6" />
               </div>
-            )}
-            
-            {submitStatus === 'error' && (
-              <div className="mb-6 p-4 bg-red-100 border-2 border-red-400 rounded-xl">
-                <p className="text-red-800 font-semibold" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{copy.error}</p>
-              </div>
-            )}
+              <p className="text-sm font-semibold uppercase tracking-wide text-gray-500" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{copy.email}</p>
+              <p className="mt-2 break-words text-lg font-bold text-gray-950" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>Steamworkshop.kids@outlook.com</p>
+            </a>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid sm:grid-cols-2 gap-6">
-                <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder={copy.namePlaceholder} className="px-5 py-3 rounded-xl border-2 border-gray-200 focus:outline-none" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif", ':focus': { borderColor: '#4B8481' } }} required />
-                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder={copy.emailPlaceholder} className="px-5 py-3 rounded-xl border-2 border-gray-200 focus:outline-none" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }} required />
+            <a href="tel:+97699224146" className="rounded-xl border border-gray-100 bg-[#f8fbfb] p-6 transition hover:border-[#4B8481] hover:bg-white">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-white text-[#4B8481] shadow-sm">
+                <Phone className="h-6 w-6" />
               </div>
-              <select name="subject" value={formData.subject} onChange={handleChange} className="w-full px-5 py-3 rounded-xl border-2 border-gray-200 focus:outline-none bg-white" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }} required>
-                <option value="">{copy.selectTopic}</option>
-                <option value="order">{copy.order}</option>
-                <option value="partnership">{copy.partnership}</option>
-                <option value="support">{copy.support}</option>
-                <option value="other">{copy.other}</option>
-              </select>
-              <textarea name="message" value={formData.message} onChange={handleChange} rows={5} placeholder={copy.messagePlaceholder} className="w-full px-5 py-3 rounded-xl border-2 border-gray-200 focus:outline-none resize-none" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }} required />
-              <button type="submit" disabled={isSubmitting} className="w-full text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:scale-[1.02] transition-all flex items-center justify-center gap-3 disabled:opacity-50" style={{ backgroundColor: '#4B8481', fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
-                {isSubmitting ? copy.sending : copy.send}
-                <Send className="w-5 h-5" />
-              </button>
-            </form>
+              <p className="text-sm font-semibold uppercase tracking-wide text-gray-500" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{copy.phone}</p>
+              <p className="mt-2 text-lg font-bold text-gray-950" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>+976 99224146</p>
+            </a>
+
+            <div className="rounded-xl border border-gray-100 bg-white p-6">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-[#e8f4f4] text-[#4B8481]">
+                <Clock className="h-6 w-6" />
+              </div>
+              <p className="text-sm font-semibold uppercase tracking-wide text-gray-500" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{copy.hours}</p>
+              <p className="mt-2 text-lg font-bold text-gray-950" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{copy.hoursValue}</p>
+            </div>
+
+            <div className="rounded-xl bg-gray-950 p-6 text-white">
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 text-white">
+                <MessageCircle className="h-6 w-6" />
+              </div>
+              <p className="text-lg font-bold" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{copy.noteTitle}</p>
+              <p className="mt-2 text-sm leading-6 text-gray-300" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{copy.note}</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
-

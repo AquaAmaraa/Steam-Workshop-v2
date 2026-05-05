@@ -76,6 +76,8 @@ export default function Dashboard() {
         browseKits: 'Багцуудыг үзэх',
         browseKitsDesc: 'Манай цуглуулгыг сонирхоорой',
         activateToTrack: 'Туршилтаа хянахын тулд багцаа идэвхжүүлнэ үү',
+        videoLessons: 'Видео хичээлүүд',
+        videoLessonsDesc: 'YouTube-ээс шууд тоглуулах 4 жишээ видео.',
       }
     : {
         pageTitle: 'Dashboard - STEAM Workshop',
@@ -110,6 +112,8 @@ export default function Dashboard() {
         browseKits: 'Browse Kits',
         browseKitsDesc: 'Explore our collection',
         activateToTrack: 'Activate a kit to start tracking experiments',
+        videoLessons: 'Video Lessons',
+        videoLessonsDesc: 'Four playable YouTube lessons you can replace with your own links.',
       };
 
   useEffect(() => {
@@ -241,6 +245,9 @@ export default function Dashboard() {
   }
 
   const stats = getTotalStats();
+  const dashboardVideos = (purchases.length > 0 ? purchases : ['core'])
+    .flatMap((kitSlug) => (kitsData[kitSlug]?.videos || []).map((video) => ({ ...video, kitTitle: kitsData[kitSlug].title })))
+    .slice(0, 4);
 
   return (
     <>
@@ -343,6 +350,38 @@ export default function Dashboard() {
               </div>
             ))}
           </div>
+
+          {dashboardVideos.length > 0 && (
+            <section className="mb-8">
+              <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{copy.videoLessons}</h2>
+                  <p className="text-gray-500" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{copy.videoLessonsDesc}</p>
+                </div>
+                <Link href="/learn" className="text-sm font-bold text-[#4B8481] hover:text-[#3f706d]" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{copy.continueLearning}</Link>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+                {dashboardVideos.map((video) => (
+                  <article key={video.id} className="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
+                    <div className="aspect-video bg-gray-950">
+                      <iframe
+                        className="h-full w-full"
+                        src={`https://www.youtube.com/embed/${video.youtubeId}`}
+                        title={video.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      />
+                    </div>
+                    <div className="p-4">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-[#4B8481]" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{video.kitTitle}</p>
+                      <h3 className="mt-1 text-base font-bold text-gray-900" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{video.title}</h3>
+                      <p className="mt-1 line-clamp-2 text-sm text-gray-600" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{video.description}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          )}
 
           <div className="flex gap-4 border-b border-gray-200 mb-8">
             {['overview', 'experiments'].map((tab) => (
