@@ -246,7 +246,7 @@ export default function Dashboard() {
   }
 
   const stats = getTotalStats();
-  const dashboardVideos = (purchases.length > 0 ? purchases : ['core'])
+  const dashboardVideos = purchases
     .flatMap((kitSlug) => (kitsData[kitSlug]?.videos || []).map((video) => ({ ...video, kitTitle: kitsData[kitSlug].title })))
     .slice(0, 4);
 
