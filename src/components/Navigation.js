@@ -9,6 +9,7 @@ export default function Navigation({ isLoggedIn, user, onLogout }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
   const { t } = useLanguage();
+  const displayName = user?.username || 'User';
 
   const handleLogout = () => {
     onLogout();
@@ -52,6 +53,9 @@ export default function Navigation({ isLoggedIn, user, onLogout }) {
                       {user?.username?.charAt(0)?.toUpperCase() || 'U'}
                     </div>
                   )}
+                  <Link href="/dashboard" className="max-w-32 truncate text-sm font-semibold text-gray-900 hover:text-[#4B8481]" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+                    {displayName}
+                  </Link>
                   <button onClick={handleLogout} className="text-sm text-gray-500 hover:text-gray-700" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
                     {t.common.signOut}
                   </button>
@@ -110,7 +114,7 @@ export default function Navigation({ isLoggedIn, user, onLogout }) {
                     </div>
                   )}
                   <span className="font-semibold text-gray-900" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
-                    {user?.username || 'User'}
+                    {displayName}
                   </span>
                 </div>
                 <Link href="/learn" className="block px-4 py-3 rounded-lg font-medium" style={{ color: '#4B8481', fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{t.common.myLearning}</Link>

@@ -74,7 +74,14 @@ export function setStoredUser(user) {
     removeCookie(USER_COOKIE);
     return;
   }
-  setJsonCookie(USER_COOKIE, user, { maxAge: 60 * 60 * 24 * 7 });
+
+  const lightweightUser = {
+    id: user.id,
+    username: user.username,
+    email: user.email,
+  };
+
+  setJsonCookie(USER_COOKIE, lightweightUser, { maxAge: 60 * 60 * 24 * 7 });
 }
 
 export function clearStoredUser() {

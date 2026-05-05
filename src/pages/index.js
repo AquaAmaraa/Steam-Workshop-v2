@@ -7,7 +7,7 @@ import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 import { useLanguage } from '../context/LanguageContext';
 import { clearClientSession, getStoredUser } from '../lib/clientCookies';
-import { fetchMongoUserData } from '../lib/userDataClient';
+import { fetchMongoUserData, persistLocalUserData } from '../lib/userDataClient';
 
 export default function Home() {
   const { language } = useLanguage();
@@ -27,6 +27,7 @@ export default function Home() {
       try {
         const serverData = await fetchMongoUserData();
         if (!isMounted) return;
+        persistLocalUserData(serverData);
         setIsLoggedIn(true);
         setUser(serverData.user);
       } catch {
