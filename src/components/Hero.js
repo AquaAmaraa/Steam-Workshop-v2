@@ -1,123 +1,113 @@
 import Image from 'next/image';
+import { ArrowRight, CheckCircle2, KeyRound, ShieldCheck, Video } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function Hero() {
   const { language } = useLanguage();
   const copy = language === 'mn'
     ? {
-        trust: 'Дэлхий даяарх 25,000+ гэр бүлийн сонголт',
-        titleLine1: 'Шинжлэх ухаан',
-        titleLine2: 'Бүтээлч сэтгэлгээтэй уулзах цэг',
-        desc: 'Багш нарын боловсруулсан, хүүхдэд ээлтэй практик STEAM багц. Туршилт бүрээр шинжлэх ухаан, технологи, инженерчлэл, урлаг, математикийг алхам алхмаар судална.',
+        eyebrow: 'STEAM Workshop Core Set',
+        title: 'Нэг багц. Илүү цэгцтэй сургалтын туршлага.',
+        desc: 'Гэр бүл, багш, сургалтын төвд зориулсан практик STEAM багц. Идэвхжүүлээд видео сан, туршилтын ахиц, суралцах дарааллаа нэг дор удирдана.',
         cta1: 'Багцыг үзэх',
         cta2: 'Багцаа идэвхжүүлэх',
-        reviews: '2,400+ сэтгэгдлээс',
+        stat1: '36 төсөл',
+        stat2: '4 видео',
+        stat3: '3 хэсэг',
         safe: 'Аюулгүй материал',
-        guides: 'Видео заавар',
-        experiments: 'Туршилт',
-        award: 'Шагналт',
-        winning: 'багц',
-        tested: 'Аюулгүй, туршигдсан',
-        scroll: 'Доош гүйлгээд үзээрэй',
+        guided: 'Видео заавар',
+        access: 'Кодоор нээгдэнэ',
+        sections: ['Discover', 'Build', 'Apply'],
       }
     : {
-        trust: 'Trusted by 25,000+ families worldwide',
-        titleLine1: 'Where Science Meets',
-        titleLine2: 'Creative Discovery',
-        desc: 'A more professional, single-set STEAM experience designed by educators. One box, three guided sections, and a clear path from exploration to application.',
+        eyebrow: 'STEAM Workshop Core Set',
+        title: 'A cleaner, more focused STEAM learning experience.',
+        desc: 'A premium single-set program for families, classrooms, and after-school learning. Activate once, unlock guided videos, track progress, and keep every activity organized.',
         cta1: 'View The Set',
         cta2: 'Activate Set',
-        reviews: 'from 2,400+ reviews',
+        stat1: '36 projects',
+        stat2: '4 videos',
+        stat3: '3 sections',
         safe: 'Safe materials',
-        guides: 'Video guides',
-        experiments: 'Experiments',
-        award: 'Award',
-        winning: 'Winning Kits',
-        tested: 'Safe & Tested',
-        scroll: 'Scroll to explore',
+        guided: 'Guided videos',
+        access: 'Code access',
+        sections: ['Discover', 'Build', 'Apply'],
       };
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-16" style={{ background: '#fafbfc' }}>
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-0 right-0 w-1/2 h-full" style={{ background: 'linear-gradient(135deg, transparent 0%, #e8f4f4 100%)' }} />
-      </div>
+    <section className="relative overflow-hidden bg-[#f7fbfb] pt-24 lg:pt-28">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#b8d8d6] to-transparent" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="order-2 lg:order-1">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-6" style={{ backgroundColor: '#e8f4f4', color: '#4B8481' }}>
-              <span className="w-2 h-2 rounded-full bg-green-500"></span>
-              {copy.trust}
-            </div>
+      <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:px-8 lg:py-20">
+        <div>
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#cfe4e2] bg-white px-4 py-2 text-sm font-bold text-[#4B8481] shadow-sm" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+            <ShieldCheck className="h-4 w-4" />
+            {copy.eyebrow}
+          </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
-              {copy.titleLine1}
-              <span className="block" style={{ color: '#4B8481' }}>{copy.titleLine2}</span>
-            </h1>
+          <h1 className="max-w-3xl text-5xl font-extrabold leading-[1.02] tracking-normal text-gray-950 sm:text-6xl lg:text-7xl" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+            {copy.title}
+          </h1>
 
-            <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-xl leading-relaxed" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
-              {copy.desc}
-            </p>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-600 sm:text-xl" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+            {copy.desc}
+          </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-10">
-              <a href="#kits" className="inline-flex items-center justify-center gap-2 px-8 py-4 text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all" style={{ backgroundColor: '#4B8481', fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
-                {copy.cta1}
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-              </a>
-              <a href="/activate" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white rounded-lg font-semibold text-lg border-2 hover:bg-gray-50 transition-all" style={{ borderColor: '#4B8481', color: '#4B8481', fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" /></svg>
-                {copy.cta2}
-              </a>
-            </div>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#kits" className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#4B8481] px-6 py-3.5 text-base font-bold text-white shadow-sm transition hover:bg-[#3f706d]" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+              {copy.cta1}
+              <ArrowRight className="h-5 w-5" />
+            </a>
+            <a href="/activate" className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#cfe4e2] bg-white px-6 py-3.5 text-base font-bold text-[#315f5d] shadow-sm transition hover:border-[#4B8481]" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+              <KeyRound className="h-5 w-5" />
+              {copy.cta2}
+            </a>
+          </div>
 
-            <div className="flex flex-wrap items-center gap-8">
-              <div className="flex items-center gap-2">
-                <div className="flex -space-x-2">
-                  {['👨‍🔬', '👩‍🏫', '👨‍💻', '👩‍🔬'].map((emoji, i) => (
-                    <div key={i} className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-lg border-2 border-white">{emoji}</div>
-                  ))}
-                </div>
-                <div className="text-sm text-gray-600" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
-                  <span className="font-bold text-gray-900">4.9/5</span> {copy.reviews}
-                </div>
+          <div className="mt-10 grid max-w-2xl grid-cols-3 gap-3">
+            {[copy.stat1, copy.stat2, copy.stat3].map((stat) => (
+              <div key={stat} className="rounded-xl border border-gray-100 bg-white p-4 shadow-sm">
+                <p className="text-lg font-extrabold text-gray-950" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{stat}</p>
               </div>
-              <div className="h-8 w-px bg-gray-200 hidden sm:block"></div>
-              <div className="flex items-center gap-4 text-sm text-gray-500" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
-                <span className="flex items-center gap-1"><svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>{copy.safe}</span>
-                <span className="flex items-center gap-1"><svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>{copy.guides}</span>
+            ))}
+          </div>
+        </div>
+
+        <div className="relative">
+          <div className="rounded-[2rem] border border-[#d7e9e7] bg-white p-4 shadow-2xl shadow-[#4B8481]/10">
+            <div className="rounded-[1.5rem] bg-[#e8f4f4] p-8">
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#4B8481]" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>Core Set</p>
+                  <p className="mt-1 text-2xl font-extrabold text-gray-950" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>Discover. Build. Apply.</p>
+                </div>
+                <div className="rounded-full bg-white px-3 py-1 text-sm font-bold text-[#4B8481] shadow-sm" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>Ages 6-14</div>
+              </div>
+
+              <div className="mt-8 flex aspect-square items-center justify-center rounded-2xl bg-white p-8 shadow-sm">
+                <Image src="/element2.svg" alt="STEAM Core Set" width={360} height={360} priority className="h-auto w-full max-w-sm" />
+              </div>
+
+              <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                {[copy.safe, copy.guided, copy.access].map((item, index) => (
+                  <div key={item} className="rounded-xl bg-white p-4 shadow-sm">
+                    {index === 1 ? <Video className="mb-3 h-5 w-5 text-[#4B8481]" /> : <CheckCircle2 className="mb-3 h-5 w-5 text-[#4B8481]" />}
+                    <p className="text-sm font-bold text-gray-800" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{item}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
-          <div className="order-1 lg:order-2 relative">
-            <div className="relative">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl" style={{ backgroundColor: '#e8f4f4' }}>
-                <div className="aspect-square flex items-center justify-center p-8">
-                  <div className="relative w-full h-full flex items-center justify-center">
-                    <Image src="/element2.svg" alt="STEAM Core Set" width={350} height={350} className="relative z-10" />
-                  </div>
-                </div>
+          <div className="mt-4 grid grid-cols-3 gap-3">
+            {copy.sections.map((section) => (
+              <div key={section} className="rounded-xl border border-gray-100 bg-white p-4 text-center shadow-sm">
+                <p className="font-bold text-gray-900" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{section}</p>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
-
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 text-gray-400">
-        <span className="text-sm" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{copy.scroll}</span>
-        <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
-      </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-12px); }
-        }
-        .animate-float {
-          animation: float 4s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   );
 }

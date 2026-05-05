@@ -2,6 +2,7 @@ import KitCard from './KitCard';
 import { getAllKits } from '../data/kits';
 import { getLocalizedKit } from '../data/kitsLocale';
 import { useLanguage } from '../context/LanguageContext';
+import { KeyRound } from 'lucide-react';
 
 export default function KitsSection() {
   const { language } = useLanguage();
@@ -30,7 +31,10 @@ export default function KitsSection() {
       };
 
   return (
-    <section id="kits" className="relative py-20 lg:py-28" style={{ background: '#fafbfc' }}>
+    <section id="kits" className="relative bg-[#fafbfc] py-20 lg:py-28">
+      <div className="mx-auto mb-4 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="h-px bg-gradient-to-r from-transparent via-[#cfe4e2] to-transparent" />
+      </div>
       <div className="space-y-0">
         <KitCard
           {...featuredKit}
@@ -41,16 +45,19 @@ export default function KitsSection() {
         />
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 mt-16 text-center">
-        <div className="bg-white rounded-2xl p-8 sm:p-12 border border-gray-100 shadow-sm">
-          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+      <div className="mx-auto mt-12 max-w-5xl px-4 text-center sm:px-6">
+        <div className="rounded-[2rem] border border-[#d7e9e7] bg-white p-8 shadow-xl shadow-[#4B8481]/10 sm:p-12">
+          <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#e8f4f4] text-[#4B8481]">
+            <KeyRound className="h-6 w-6" />
+          </div>
+          <h3 className="mb-4 text-3xl font-extrabold text-gray-950 sm:text-4xl" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
             {copy.bottomTitle}
           </h3>
-          <p className="text-gray-600 mb-6 max-w-lg mx-auto" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+          <p className="mx-auto mb-6 max-w-2xl text-lg leading-8 text-gray-600" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
             {copy.bottomDesc}
           </p>
-          <a href="/activate" className="inline-flex items-center gap-2 px-8 py-4 text-white rounded-lg font-semibold text-lg hover:opacity-90 transition-all" style={{ backgroundColor: '#4B8481', fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" /></svg>
+          <a href="/activate" className="inline-flex items-center gap-2 rounded-lg bg-[#4B8481] px-8 py-4 text-lg font-bold text-white transition hover:bg-[#3f706d]" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+            <KeyRound className="h-5 w-5" />
             {copy.bottomCta}
           </a>
         </div>

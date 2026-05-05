@@ -1,13 +1,14 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import Image from 'next/image';
+import { ArrowRight, Check, Eye, PackageCheck } from 'lucide-react';
 
-export default function KitCard({ 
+export default function KitCard({
   title,
   subtitle,
-  ageRange, 
-  description, 
-  features, 
-  image, 
+  ageRange,
+  description,
+  features,
+  image,
   floatingBadges = [],
   stats = {},
   reverse = false,
@@ -25,46 +26,42 @@ export default function KitCard({
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-        
-        {/* Image Section */}
-        <div className={`relative flex justify-center items-center ${reverse ? 'lg:order-2' : 'lg:order-1'}`}>
-          <div className="relative">
-            {/* Background shape */}
-            {!hideBackground && (
-              <div className="absolute inset-0 rounded-3xl transform rotate-3" style={{ backgroundColor: '#e8f4f4' }} />
-            )}
-            
-            {/* Image container */}
-            <div className="relative bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-gray-100">
-              <Image src={image} alt={`${title} Kit`} width={320} height={320} className="w-48 sm:w-64 lg:w-72 h-auto mx-auto" />
+    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+      <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[0.9fr_1fr] lg:gap-20">
+        <div className={`relative flex items-center justify-center ${reverse ? 'lg:order-2' : 'lg:order-1'}`}>
+          <div className="relative w-full max-w-lg">
+            {!hideBackground && <div className="absolute inset-4 rounded-[2rem] bg-[#dcefed]" />}
+
+            <div className="relative rounded-[2rem] border border-[#d7e9e7] bg-white p-8 shadow-xl shadow-[#4B8481]/10 sm:p-12">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-[#e8f4f4] px-3 py-1 text-sm font-bold text-[#4B8481]" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+                <PackageCheck className="h-4 w-4" />
+                Core Set
+              </div>
+              <Image src={image} alt={`${title} Kit`} width={320} height={320} className="mx-auto h-auto w-56 sm:w-72" />
             </div>
 
-            {/* Floating badges */}
             {floatingBadges.map((badge, i) => (
-              <div 
+              <div
                 key={i}
-                className={`absolute ${floatingPositions[badge.position]} bg-white px-3 sm:px-4 py-2 rounded-xl shadow-lg flex items-center gap-2 z-10`}
+                className={`absolute ${floatingPositions[badge.position]} z-10 flex items-center gap-2 rounded-xl border border-gray-100 bg-white px-3 py-2 shadow-lg sm:px-4`}
               >
-                <span className="text-lg">{badge.emoji}</span>
-                <span className="font-medium text-gray-700 text-sm" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{badge.text}</span>
+                <span className="text-sm font-black text-[#4B8481]">{badge.emoji}</span>
+                <span className="text-sm font-bold text-gray-700" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{badge.text}</span>
               </div>
             ))}
 
-            {/* Stats badge */}
             {stats.rating && (
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white px-5 py-3 rounded-xl shadow-lg flex items-center gap-4 z-10">
+              <div className="absolute -bottom-5 left-1/2 z-10 flex -translate-x-1/2 items-center gap-4 rounded-xl border border-gray-100 bg-white px-5 py-3 shadow-lg">
                 <div className="text-center">
                   <div className="text-lg font-bold text-gray-900" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{stats.projects}</div>
                   <div className="text-xs text-gray-500" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{labels.projects}</div>
                 </div>
-                <div className="w-px h-8 bg-gray-200" />
+                <div className="h-8 w-px bg-gray-200" />
                 <div className="text-center">
-                  <div className="text-lg font-bold" style={{ color: '#4B8481', fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{stats.rating}</div>
+                  <div className="text-lg font-bold text-[#4B8481]" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{stats.rating}</div>
                   <div className="text-xs text-gray-500" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{labels.rating}</div>
                 </div>
-                <div className="w-px h-8 bg-gray-200" />
+                <div className="h-8 w-px bg-gray-200" />
                 <div className="text-center">
                   <div className="text-lg font-bold text-gray-900" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{stats.students}</div>
                   <div className="text-xs text-gray-500" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{labels.students}</div>
@@ -74,53 +71,40 @@ export default function KitCard({
           </div>
         </div>
 
-        {/* Content Section */}
         <div className={`${reverse ? 'lg:order-1' : 'lg:order-2'} mt-8 lg:mt-0`}>
-          {/* Age badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-4" style={{ backgroundColor: '#e8f4f4', color: '#4B8481', fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#cfe4e2] bg-white px-4 py-2 text-sm font-bold text-[#4B8481]" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
             {ageRange}
           </div>
 
-          {/* Title */}
-          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-2" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+          <h3 className="mb-3 text-4xl font-extrabold leading-tight text-gray-950 sm:text-5xl" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
             {title}
-            <span className="block text-xl sm:text-2xl font-normal text-gray-500 mt-1">{subtitle}</span>
+            <span className="mt-2 block text-xl font-semibold text-[#4B8481] sm:text-2xl">{subtitle}</span>
           </h3>
-          
-          {/* Description */}
-          <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-lg" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+
+          <p className="mb-8 max-w-xl text-lg leading-8 text-gray-600" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
             {description}
           </p>
-          
-          {/* Features */}
+
           <div className="mb-8">
-            <ul className="space-y-3">
+            <ul className="grid gap-3">
               {features.map((feature, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: '#4B8481' }}>
-                    <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
+                <li key={i} className="flex items-start gap-3 rounded-xl border border-gray-100 bg-white p-4 shadow-sm">
+                  <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[#4B8481]">
+                    <Check className="h-4 w-4 text-white" />
                   </div>
                   <span className="text-gray-700" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{feature}</span>
                 </li>
               ))}
             </ul>
           </div>
-          
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Link href={`/kit/${slug}`} className="inline-flex items-center justify-center gap-2 text-white px-6 py-3 rounded-lg font-semibold shadow-sm hover:opacity-90 transition-all" style={{ backgroundColor: '#4B8481', fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Link href={`/kit/${slug}`} className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#4B8481] px-6 py-3 font-bold text-white shadow-sm transition hover:bg-[#3f706d]" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
               {ctaLearnMore}
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link href={`/kit/${slug}`} className="inline-flex items-center justify-center gap-2 border-2 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-all" style={{ borderColor: '#e5e7eb', color: '#374151', fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-              </svg>
+            <Link href={`/kit/${slug}`} className="inline-flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-6 py-3 font-bold text-gray-700 transition hover:border-[#4B8481] hover:text-[#4B8481]" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+              <Eye className="h-4 w-4" />
               {ctaViewSamples}
             </Link>
           </div>
@@ -129,4 +113,3 @@ export default function KitCard({
     </div>
   );
 }
-

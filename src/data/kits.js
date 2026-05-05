@@ -34,16 +34,16 @@ export const kitsData = {
     ],
     activationCodes: ['CORE-2026-PRO1'],
     experiments: [
-      { id: 'core-1', title: 'Color Reaction Lab', description: 'Observe and record controlled color-change reactions.', duration: '20 mins', difficulty: 'Easy', videoId: 'core-color-reaction', thumbnail: '01' },
-      { id: 'core-2', title: 'Magnetic Build Challenge', description: 'Design a stable structure using magnetic components.', duration: '25 mins', difficulty: 'Medium', videoId: 'core-magnetic-build', thumbnail: '02' },
-      { id: 'core-3', title: 'Simple Motion System', description: 'Assemble a moving mechanism and test performance.', duration: '35 mins', difficulty: 'Medium', videoId: 'core-motion-system', thumbnail: '03' },
-      { id: 'core-4', title: 'Problem-Solving Sprint', description: 'Apply what you learned to complete a guided design challenge.', duration: '30 mins', difficulty: 'Hard', videoId: 'core-problem-solving', thumbnail: '04' }
+      { id: 'core-1', title: "Don't Stop 'Til You Get Enough", description: 'A high-energy rhythm warmup for the first guided video.', duration: '04 mins', difficulty: 'Easy', videoId: 'core-color-reaction', thumbnail: '01' },
+      { id: 'core-2', title: 'ABC', description: 'A bright Jackson 5 classic for the second guided video.', duration: '03 mins', difficulty: 'Easy', videoId: 'core-magnetic-build', thumbnail: '02' },
+      { id: 'core-3', title: 'Bad', description: 'The remastered Michael Jackson performance slot.', duration: '04 mins', difficulty: 'Medium', videoId: 'core-motion-system', thumbnail: '03' },
+      { id: 'core-4', title: 'You Rock My World', description: 'A polished long-form music video for the final slot.', duration: '13 mins', difficulty: 'Medium', videoId: 'core-problem-solving', thumbnail: '04' }
     ],
     videos: [
-      { id: 'core-color-reaction', title: 'Color Reaction Lab', youtubeId: 'M7lc1UVf-VE', duration: '08:40', description: 'A guided lesson on observing and documenting color reactions.', experimentId: 'core-1' },
-      { id: 'core-magnetic-build', title: 'Magnetic Build Challenge', youtubeId: 'aqz-KE-bpKQ', duration: '10:25', description: 'Build with intent and improve structural stability.', experimentId: 'core-2' },
-      { id: 'core-motion-system', title: 'Simple Motion System', youtubeId: 'ysz5S6PUM-U', duration: '12:15', description: 'Learn how motion, force, and control work together.', experimentId: 'core-3' },
-      { id: 'core-problem-solving', title: 'Problem-Solving Sprint', youtubeId: 'ScMzIvxBSi4', duration: '11:30', description: 'Use the full workflow to solve a structured challenge.', experimentId: 'core-4' }
+      { id: 'core-color-reaction', title: "Michael Jackson - Don't Stop 'Til You Get Enough", youtubeId: 'yURRmWtbTbo', duration: '04:14', description: 'Official upscaled music video.', experimentId: 'core-1' },
+      { id: 'core-magnetic-build', title: 'The Jackson 5 - ABC', youtubeId: 'ho7796-au8U', duration: '02:54', description: 'Classic Jackson 5 performance video.', experimentId: 'core-2' },
+      { id: 'core-motion-system', title: 'Michael Jackson - Bad', youtubeId: 'Sd4SJVsTulc', duration: '04:20', description: 'Official remastered music video.', experimentId: 'core-3' },
+      { id: 'core-problem-solving', title: 'Michael Jackson - You Rock My World', youtubeId: '1-7ABIM2qjU', duration: '13:33', description: 'Official long-form music video.', experimentId: 'core-4' }
     ]
   }
 };
