@@ -4,16 +4,13 @@ import { MongoClient } from 'mongodb';
 import * as brevo from '@getbrevo/brevo';
 import { createAuthCookie } from '../../lib/apiAuth';
 
-const apiInstance = new brevo.TransactionalEmailsApi();
-apiInstance.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, process.env.BREVO_API_KEY);
-
-const MONGODB_URI = process.env.MONGODB_URI;
 const DB_NAME = 'steamworkshop';
 const COLLECTION_NAME = 'users';
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this';
 
 const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 const validatePassword = (password) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password);
+const normalizeEmail = (email) => String(email || '').trim().toLowerCase();
 
 const buildWelcomeEmail = (username) => `
   <div style="margin:0;padding:32px;background:#f3f7f6;font-family:Arial,sans-serif;color:#1f2937;">
@@ -40,12 +37,33 @@ const buildWelcomeEmail = (username) => `
   </div>
 `;
 
+async function sendWelcomeEmail({ email, username }) {
+  if (!process.env.BREVO_API_KEY) {
+    console.warn('Skipping welcome email: BREVO_API_KEY is not configured.');
+    return;
+  }
+
+  const apiInstance = new brevo.TransactionalEmailsApi();
+  apiInstance.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, process.env.BREVO_API_KEY);
+
+  const sendEmail = new brevo.SendSmtpEmail();
+  sendEmail.sender = {
+    name: process.env.BREVO_FROM_NAME || 'STEAM Workshop',
+    email: process.env.BREVO_FROM_EMAIL || 'Steamworkshop.kids@outlook.com'
+  };
+  sendEmail.to = [{ email }];
+  sendEmail.subject = 'Welcome to STEAM Workshop';
+  sendEmail.htmlContent = buildWelcomeEmail(username);
+  await apiInstance.sendTransacEmail(sendEmail);
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { username, email, password } = req.body;
+  const { username, password } = req.body;
+  const email = normalizeEmail(req.body.email);
 
   if (!username || !email || !password) {
     return res.status(400).json({ error: 'All fields are required' });
@@ -68,7 +86,12 @@ export default async function handler(req, res) {
   let client;
 
   try {
-    client = new MongoClient(MONGODB_URI);
+    if (!process.env.MONGODB_URI) {
+      console.error('Signup configuration error: MONGODB_URI is not set.');
+      return res.status(500).json({ error: 'Signup is not configured yet. Please contact support.' });
+    }
+
+    client = new MongoClient(process.env.MONGODB_URI);
     await client.connect();
 
     const db = client.db(DB_NAME);
@@ -96,7 +119,7 @@ export default async function handler(req, res) {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = {
-      username,
+      username: username.trim(),
       email,
       password: hashedPassword,
       profilePicture: null,
@@ -111,15 +134,7 @@ export default async function handler(req, res) {
     const result = await usersCollection.insertOne(newUser);
 
     try {
-      const sendEmail = new brevo.SendSmtpEmail();
-      sendEmail.sender = {
-        name: process.env.BREVO_FROM_NAME || 'STEAM Workshop',
-        email: process.env.BREVO_FROM_EMAIL || 'Steamworkshop.kids@outlook.com'
-      };
-      sendEmail.to = [{ email }];
-      sendEmail.subject = 'Welcome to STEAM Workshop';
-      sendEmail.htmlContent = buildWelcomeEmail(username);
-      await apiInstance.sendTransacEmail(sendEmail);
+      await sendWelcomeEmail({ email, username: newUser.username });
     } catch (emailError) {
       console.error('Welcome email error:', emailError);
     }

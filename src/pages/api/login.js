@@ -3,7 +3,6 @@ import { MongoClient } from 'mongodb';
 import jwt from 'jsonwebtoken';
 import { createAuthCookie } from '../../lib/apiAuth';
 
-const MONGODB_URI = process.env.MONGODB_URI;
 const DB_NAME = 'steamworkshop';
 const COLLECTION_NAME = 'users';
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this';
@@ -18,7 +17,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { email, password } = req.body;
+  const email = String(req.body.email || '').trim().toLowerCase();
+  const { password } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({ error: 'Email and password are required' });
@@ -31,7 +31,12 @@ export default async function handler(req, res) {
   let client;
 
   try {
-    client = new MongoClient(MONGODB_URI);
+    if (!process.env.MONGODB_URI) {
+      console.error('Login configuration error: MONGODB_URI is not set.');
+      return res.status(500).json({ error: 'Login is not configured yet. Please contact support.' });
+    }
+
+    client = new MongoClient(process.env.MONGODB_URI);
     await client.connect();
 
     const db = client.db(DB_NAME);
