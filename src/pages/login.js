@@ -116,13 +116,9 @@ export default function Login() {
                 )}
 
                 {errorType === 'wrongPassword' && (
-                  <Link
-                    href="/forgot-password"
-                    className="inline-block mt-2 text-sm font-semibold underline text-red-700 hover:text-red-800"
-                    style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}
-                  >
-                    Reset your password -&gt;
-                  </Link>
+                  <p className="mt-2 text-sm text-red-700" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+                    Please check your password and try again.
+                  </p>
                 )}
               </div>
             )}
@@ -168,16 +164,6 @@ export default function Login() {
                   }}
                   required
                 />
-              </div>
-
-              <div className="flex justify-end">
-                <Link
-                  href="/forgot-password"
-                  className="text-sm font-semibold hover:opacity-90"
-                  style={{ color: palette.primary, fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}
-                >
-                  Forgot password?
-                </Link>
               </div>
 
               <button
