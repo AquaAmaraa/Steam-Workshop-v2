@@ -116,7 +116,7 @@ export default function Dashboard() {
         browseKitsDesc: 'Explore our collection',
         activateToTrack: 'Activate a kit to start tracking experiments',
         videoLessons: 'Video Lessons',
-        videoLessonsDesc: 'Eight playable Michael Jackson videos.',
+        videoLessonsDesc: 'Four playable videos are available now.',
         yes: 'Yes',
         no: 'No',
       };
@@ -154,9 +154,11 @@ export default function Dashboard() {
 
   const getKitProgress = (kitSlug) => {
     const kit = kitsData[kitSlug];
-    if (!kit || !progress[kitSlug]) return { percent: 0, watched: 0, total: 0 };
-    const totalVideos = kit.videos.length;
-    const watchedVideos = progress[kitSlug]?.watchedVideos?.length || 0;
+    if (!kit) return { percent: 0, watched: 0, total: 0 };
+    const availableVideoIds = kit.videos.filter((video) => video.youtubeId).map((video) => video.id);
+    const totalVideos = availableVideoIds.length;
+    const watchedVideos = (progress[kitSlug]?.watchedVideos || []).filter((videoId) => availableVideoIds.includes(videoId)).length;
+    if (totalVideos === 0) return { percent: 0, watched: 0, total: 0 };
     return { percent: Math.round((watchedVideos / totalVideos) * 100), watched: watchedVideos, total: totalVideos };
   };
 
@@ -169,10 +171,11 @@ export default function Dashboard() {
     purchases.forEach((kitSlug) => {
       const kit = kitsData[kitSlug];
       if (kit) {
+        const availableVideoIds = kit.videos.filter((video) => video.youtubeId).map((video) => video.id);
         totalExperiments += kit.experiments.length;
-        totalVideos += kit.videos.length;
+        totalVideos += availableVideoIds.length;
         completedExperiments += progress[kitSlug]?.completedExperiments?.length || 0;
-        watchedVideos += progress[kitSlug]?.watchedVideos?.length || 0;
+        watchedVideos += (progress[kitSlug]?.watchedVideos || []).filter((videoId) => availableVideoIds.includes(videoId)).length;
       }
     });
 
@@ -251,8 +254,8 @@ export default function Dashboard() {
 
   const stats = getTotalStats();
   const dashboardVideos = purchases
-    .flatMap((kitSlug) => (kitsData[kitSlug]?.videos || []).map((video) => ({ ...video, kitTitle: kitsData[kitSlug].title })))
-    .slice(0, 8);
+    .flatMap((kitSlug) => (kitsData[kitSlug]?.videos || []).filter((video) => video.youtubeId).map((video) => ({ ...video, kitTitle: kitsData[kitSlug].title })))
+    .slice(0, 4);
 
   return (
     <>

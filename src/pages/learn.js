@@ -57,6 +57,7 @@ export default function Learn() {
   };
 
   const handleWatchVideo = (video) => {
+    if (!video.youtubeId) return;
     setSelectedVideo(video);
     setShowVideoModal(true);
   };
@@ -100,8 +101,10 @@ export default function Learn() {
     const kit = kitsData[kitSlug];
     if (!kit || !progress[kitSlug]) return 0;
 
-    const totalVideos = kit.videos.length;
-    const watchedVideos = progress[kitSlug]?.watchedVideos?.length || 0;
+    const availableVideoIds = kit.videos.filter((video) => video.youtubeId).map((video) => video.id);
+    const totalVideos = availableVideoIds.length;
+    const watchedVideos = (progress[kitSlug]?.watchedVideos || []).filter((videoId) => availableVideoIds.includes(videoId)).length;
+    if (totalVideos === 0) return 0;
     return Math.round((watchedVideos / totalVideos) * 100);
   };
 
@@ -236,27 +239,40 @@ export default function Learn() {
               <div className="lg:col-span-3">
                 {localizedCurrentKit && (
                   <>
+                    {(() => {
+                      const availableVideoIds = localizedCurrentKit.videos.filter((video) => video.youtubeId).map((video) => video.id);
+                      const watchedAvailableVideos = (progress[selectedKit]?.watchedVideos || []).filter((videoId) => availableVideoIds.includes(videoId)).length;
+                      return (
                     <div className="bg-white rounded-xl p-6 border border-gray-100 mb-6">
                       <div className="flex items-center gap-4">
                         <Image src={localizedCurrentKit.image} alt={localizedCurrentKit.title} width={64} height={64} />
                         <div>
                           <h2 className="text-xl font-bold text-gray-900" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{localizedCurrentKit.title} {copy.tutorialsSuffix}</h2>
-                          <p className="text-gray-500" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{localizedCurrentKit.videos.length} {language === 'mn' ? 'видео' : 'videos'} • {progress[selectedKit]?.watchedVideos?.length || 0} {copy.complete}</p>
+                          <p className="text-gray-500" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{availableVideoIds.length} {language === 'mn' ? 'видео' : 'videos'} • {watchedAvailableVideos} {copy.complete}</p>
                         </div>
                       </div>
                     </div>
+                      );
+                    })()}
 
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                       {localizedCurrentKit.videos.map((video, index) => {
                         const watched = isVideoWatched(video.id);
+                        const isAvailable = Boolean(video.youtubeId);
                         return (
-                          <div key={video.id} onClick={() => handleWatchVideo(video)} className={`bg-white rounded-xl overflow-hidden border cursor-pointer hover:shadow-md transition-all ${watched ? 'border-green-200' : 'border-gray-100'}`}>
+                          <div key={video.id} onClick={() => handleWatchVideo(video)} className={`bg-white rounded-xl overflow-hidden border transition-all ${isAvailable ? 'cursor-pointer hover:shadow-md' : 'cursor-default opacity-75'} ${watched ? 'border-green-200' : 'border-gray-100'}`}>
                             <div className="relative aspect-video overflow-hidden bg-gray-950">
-                              <img
-                                src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
-                                alt=""
-                                className="h-full w-full object-cover opacity-90 transition-transform duration-300 hover:scale-105"
-                              />
+                              {isAvailable ? (
+                                <img
+                                  src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
+                                  alt=""
+                                  className="h-full w-full object-cover opacity-90 transition-transform duration-300 hover:scale-105"
+                                />
+                              ) : (
+                                <div className="flex h-full w-full items-center justify-center bg-gray-900 text-sm font-semibold text-white/80" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
+                                  Coming soon
+                                </div>
+                              )}
                               <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{video.duration}</div>
                               {watched && (
                                 <div className="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full flex items-center gap-1" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>
@@ -264,11 +280,11 @@ export default function Learn() {
                                   {copy.done}
                                 </div>
                               )}
-                              <div className="absolute inset-0 flex items-center justify-center bg-black/0 hover:bg-black/10 transition-colors">
+                              {isAvailable && <div className="absolute inset-0 flex items-center justify-center bg-black/0 hover:bg-black/10 transition-colors">
                                 <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
                                   <svg className="w-5 h-5 ml-1" style={{ color: '#4B8481' }} fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" /></svg>
                                 </div>
-                              </div>
+                              </div>}
                             </div>
                             <div className="p-4">
                               <div className="text-xs text-gray-500 mb-1" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{copy.video} {index + 1}</div>

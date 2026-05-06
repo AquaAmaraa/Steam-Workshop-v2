@@ -34,24 +34,24 @@ export const kitsData = {
     ],
     activationCodes: ['CORE-2026-PRO1'],
     experiments: [
-      { id: 'core-1', title: "Don't Stop 'Til You Get Enough", description: 'A high-energy rhythm warmup for the first guided video.', duration: '04 mins', difficulty: 'Easy', videoId: 'core-color-reaction', thumbnail: '01' },
-      { id: 'core-2', title: 'ABC', description: 'A bright Jackson 5 classic for the second guided video.', duration: '03 mins', difficulty: 'Easy', videoId: 'core-magnetic-build', thumbnail: '02' },
-      { id: 'core-3', title: 'Bad', description: 'The remastered Michael Jackson performance slot.', duration: '04 mins', difficulty: 'Medium', videoId: 'core-motion-system', thumbnail: '03' },
-      { id: 'core-4', title: 'You Rock My World', description: 'A polished long-form music video for the fourth slot.', duration: '13 mins', difficulty: 'Medium', videoId: 'core-problem-solving', thumbnail: '04' },
-      { id: 'core-5', title: 'P.Y.T. (Pretty Young Thing)', description: 'A Thriller favorite with a bright pop groove.', duration: '04 mins', difficulty: 'Easy', videoId: 'core-pyt', thumbnail: '05' },
-      { id: 'core-6', title: 'Rock With You', description: 'The single-version Off the Wall classic.', duration: '03 mins', difficulty: 'Easy', videoId: 'core-rock-with-you', thumbnail: '06' },
-      { id: 'core-7', title: 'Chicago', description: 'A smooth Xscape-era Michael Jackson track.', duration: '04 mins', difficulty: 'Medium', videoId: 'core-chicago', thumbnail: '07' },
-      { id: 'core-8', title: 'Human Nature', description: 'A calm Thriller classic for the final video slot.', duration: '04 mins', difficulty: 'Easy', videoId: 'core-human-nature', thumbnail: '08' }
+      { id: 'core-1', title: 'Guided Video 1', description: 'First guided video for the STEAM Core Set.', duration: 'Video', difficulty: 'Easy', videoId: 'core-color-reaction', thumbnail: '01' },
+      { id: 'core-2', title: 'Guided Video 2', description: 'Second guided video for the STEAM Core Set.', duration: 'Video', difficulty: 'Easy', videoId: 'core-magnetic-build', thumbnail: '02' },
+      { id: 'core-3', title: 'Guided Video 3', description: 'Third guided video for the STEAM Core Set.', duration: 'Video', difficulty: 'Medium', videoId: 'core-motion-system', thumbnail: '03' },
+      { id: 'core-4', title: 'Guided Video 4', description: 'Fourth guided video for the STEAM Core Set.', duration: 'Video', difficulty: 'Medium', videoId: 'core-problem-solving', thumbnail: '04' },
+      { id: 'core-5', title: 'Guided Video 5', description: 'This video slot will be added later.', duration: 'Coming soon', difficulty: 'Easy', videoId: 'core-pyt', thumbnail: '05' },
+      { id: 'core-6', title: 'Guided Video 6', description: 'This video slot will be added later.', duration: 'Coming soon', difficulty: 'Easy', videoId: 'core-rock-with-you', thumbnail: '06' },
+      { id: 'core-7', title: 'Guided Video 7', description: 'This video slot will be added later.', duration: 'Coming soon', difficulty: 'Medium', videoId: 'core-chicago', thumbnail: '07' },
+      { id: 'core-8', title: 'Guided Video 8', description: 'This video slot will be added later.', duration: 'Coming soon', difficulty: 'Easy', videoId: 'core-human-nature', thumbnail: '08' }
     ],
     videos: [
-      { id: 'core-color-reaction', title: "Michael Jackson - Don't Stop 'Til You Get Enough", youtubeId: 'yURRmWtbTbo', duration: '04:14', description: 'Official upscaled music video.', experimentId: 'core-1' },
-      { id: 'core-magnetic-build', title: 'The Jackson 5 - ABC', youtubeId: 'ho7796-au8U', duration: '02:54', description: 'Classic Jackson 5 performance video.', experimentId: 'core-2' },
-      { id: 'core-motion-system', title: 'Michael Jackson - Bad', youtubeId: 'Sd4SJVsTulc', duration: '04:20', description: 'Official remastered music video.', experimentId: 'core-3' },
-      { id: 'core-problem-solving', title: 'Michael Jackson - You Rock My World', youtubeId: '1-7ABIM2qjU', duration: '13:33', description: 'Official long-form music video.', experimentId: 'core-4' },
-      { id: 'core-pyt', title: 'Michael Jackson - P.Y.T. (Pretty Young Thing)', youtubeId: '_GlgOkBR1vU', duration: '04:01', description: 'Official audio from Thriller.', experimentId: 'core-5' },
-      { id: 'core-rock-with-you', title: 'Michael Jackson - Rock With You', youtubeId: '5X-Mrc2l1d0', duration: '03:22', description: 'Official upscaled single-version video.', experimentId: 'core-6' },
-      { id: 'core-chicago', title: 'Michael Jackson - Chicago', youtubeId: 'Y_8mUx4VOmo', duration: '04:05', description: 'Official audio from Xscape.', experimentId: 'core-7' },
-      { id: 'core-human-nature', title: 'Michael Jackson - Human Nature', youtubeId: 'ElN_4vUvTPs', duration: '04:06', description: 'Official audio from Thriller.', experimentId: 'core-8' }
+      { id: 'core-color-reaction', title: 'STEAM Core Video 1', youtubeId: 'sowfpS3vL-A', duration: 'Video', description: 'Guided video for the STEAM Core Set.', experimentId: 'core-1' },
+      { id: 'core-magnetic-build', title: 'STEAM Core Video 2', youtubeId: '0LiwcbXCry8', duration: 'Video', description: 'Guided video for the STEAM Core Set.', experimentId: 'core-2' },
+      { id: 'core-motion-system', title: 'STEAM Core Video 3', youtubeId: 'lmeVwLmZ9b4', duration: 'Video', description: 'Guided video for the STEAM Core Set.', experimentId: 'core-3' },
+      { id: 'core-problem-solving', title: 'STEAM Core Video 4', youtubeId: 'cv1RqBcvzvc', duration: 'Video', description: 'Guided video for the STEAM Core Set.', experimentId: 'core-4' },
+      { id: 'core-pyt', title: 'STEAM Core Video 5', youtubeId: '', duration: 'Coming soon', description: 'This video slot will be added later.', experimentId: 'core-5' },
+      { id: 'core-rock-with-you', title: 'STEAM Core Video 6', youtubeId: '', duration: 'Coming soon', description: 'This video slot will be added later.', experimentId: 'core-6' },
+      { id: 'core-chicago', title: 'STEAM Core Video 7', youtubeId: '', duration: 'Coming soon', description: 'This video slot will be added later.', experimentId: 'core-7' },
+      { id: 'core-human-nature', title: 'STEAM Core Video 8', youtubeId: '', duration: 'Coming soon', description: 'This video slot will be added later.', experimentId: 'core-8' }
     ]
   }
 };

@@ -1,6 +1,7 @@
-import Image from 'next/image';
 import { ArrowRight, CheckCircle2, KeyRound, ShieldCheck, Video } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+
+const introVideoId = 'Zi_XLOBDo_Y';
 
 export default function Hero() {
   const { language } = useLanguage();
@@ -27,6 +28,7 @@ export default function Hero() {
         access: 'Code access',
         sections: ['Discover', 'Build', 'Apply'],
       };
+  const introTitle = language === 'mn' ? 'Introduction Video' : 'Introduction Video';
 
   return (
     <section className="relative overflow-hidden bg-[#f7fbfb] pt-24 lg:pt-28">
@@ -71,8 +73,20 @@ export default function Hero() {
                 <div className="rounded-full bg-white px-3 py-1 text-sm font-bold text-[#4B8481] shadow-sm" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>Ages 6-14</div>
               </div>
 
-              <div className="mt-8 flex aspect-square items-center justify-center rounded-2xl bg-white p-8 shadow-sm">
-                <Image src="/element2.svg" alt="STEAM Core Set" width={360} height={360} priority className="h-auto w-full max-w-sm" />
+              <div className="mt-8 overflow-hidden rounded-2xl bg-gray-950 shadow-sm">
+                <div className="flex items-center justify-between gap-3 bg-white px-4 py-3">
+                  <p className="text-sm font-bold text-gray-900" style={{ fontFamily: "'Baloo 2', 'Noto Sans', sans-serif" }}>{introTitle}</p>
+                  <Video className="h-5 w-5 text-[#4B8481]" />
+                </div>
+                <div className="aspect-video">
+                  <iframe
+                    className="h-full w-full"
+                    src={`https://www.youtube.com/embed/${introVideoId}`}
+                    title={introTitle}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
               </div>
 
               <div className="mt-6 grid gap-3 sm:grid-cols-3">
