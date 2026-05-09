@@ -1,7 +1,7 @@
 import { ArrowRight, CheckCircle2, KeyRound, ShieldCheck, Video } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-const introVideoId = 'uIX_-oxBan8';
+const introVideoId = 'wJwlzzLfUcc';
 
 export default function Hero() {
   const { language } = useLanguage();
